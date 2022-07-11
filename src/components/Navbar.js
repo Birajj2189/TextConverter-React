@@ -1,11 +1,39 @@
-import React from 'react'
+import { clear } from '@testing-library/user-event/dist/clear';
+import React,{useState}  from 'react'
 import {Link} from 'react-router-dom';
 
 export default function Navbar(prop) {
+  const [theme , switchTheme] = useState('warning');
+
+  const clearCheck=()=>{
+      Array.from(document.getElementsByClassName('theme-switch')).forEach((element)=>{
+        element.checked= false;
+    })
+  }
+  const toggleToBlue =()=>{
+    switchTheme('primary');
+    clearCheck();
+    document.getElementById('primary').checked = true;
+  }
+  const toggleToRed=()=>{
+    switchTheme('danger');
+    clearCheck();
+    document.getElementById('danger').checked = true;
+  }
+  const toggleToYellow =()=>{
+    switchTheme('warning');
+    clearCheck();
+    document.getElementById('warning').checked = true;
+  }
+  const toggleToGreen =()=>{
+    switchTheme('success');
+    clearCheck();
+    document.getElementById('success').checked = true;
+  }
   
   return (
       <>
-<nav className="navbar navbar-expand-lg bg-warning">
+<nav className={`navbar navbar-expand-lg bg-${theme}`}>
   <div className="container-fluid">
     <Link className="navbar-brand" to="/">Text Editor</Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,25 +51,25 @@ export default function Navbar(prop) {
           <ul className="dropdown-menu" style={{padding:'1rem'}} aria-labelledby="navbarDropdown">
             <li>
               <div className="form-check form-switch">
-              <input className="form-check-input theme-switch" onClick = {prop.toggleTheme}  onChange={prop.toggleTheme} type="checkbox" role="switch" id="success"/>
+              <input className="form-check-input theme-switch" onClick = {toggleToGreen}  type="checkbox" role="switch" id="success"/>
               <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Green</label> 
               </div>
             </li>
             <li>
               <div className="form-check form-switch">
-              <input className="form-check-input theme-switch" onChange={prop.toggleTheme} onClick = {prop.toggleTheme} type="checkbox" role="switch" id="warning" defaultChecked/>
+              <input className="form-check-input theme-switch" onClick = {toggleToYellow} type="checkbox" role="switch" id="warning" defaultChecked/>
               <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Yellow</label> 
               </div>
             </li>
             <li>
               <div className="form-check form-switch">
-              <input className="form-check-input theme-switch"  onChange={prop.toggleTheme} onClick = {prop.toggleTheme} type="checkbox" role="switch" id="danger"/>
+              <input className="form-check-input theme-switch" onClick = {toggleToRed} type="checkbox" role="switch" id="danger"/>
               <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Red</label> 
               </div>
             </li>
             <li>
               <div className="form-check form-switch">
-              <input className="form-check-input theme-switch"   onClick = {prop.toggleTheme} type="checkbox" role="switch" id="primary"/>
+              <input className="form-check-input theme-switch"  onClick = {toggleToBlue} type="checkbox" role="switch" id="primary"/>
               <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Blue</label> 
               </div>
             </li>

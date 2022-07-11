@@ -19,7 +19,6 @@ const history = createBrowserHistory();
 
 function App() {
   const [mode , switchMode] = useState('light');
-  const [theme , switchTheme] = useState('warning');
   const [alert , setAlert] = useState(null);
 
   const showAlert = (message,type) => { 
@@ -48,11 +47,11 @@ function App() {
   }
   return (
     <Router history={history} >
-      <Navbar theme = {mode} toggleMode={toggleMode} />
+      <Navbar mode = {mode} toggleMode={toggleMode} />
       <Alert alert={alert} style={{position:'fixed'}}/>
       <div className='container'>
         <Routes>
-          <Route path="/about" element ={<About mode={mode}/>}/>
+          <Route path="/about" mode={mode} element ={<About mode={mode}/>}/>
           <Route path="/" element={<Textarea alert={showAlert} mode={mode} heading = "Enter your text here : "/>}/>
         </Routes>
       </div>

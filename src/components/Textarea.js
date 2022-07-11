@@ -40,16 +40,16 @@ return (
                <textarea className="form-control" id="exampleFormControlTextarea1" onChange={handleOnChange} style = {{backgroundColor : props.mode==='dark'?'grey':'white'}} value={Text} rows="8" ></textarea>
           </div>
           <div className="btn-container mb-3">
-               <button className="btn btn-primary  btn-sm mx-1" onClick={handleUpClick}>Convert to UpperCase</button>
-               <button className="btn btn-primary  btn-sm mx-1" onClick={handleLowClick}>Convert to LowerCase</button>
-               <button className="btn btn-primary  btn-sm mx-1" onClick={handleExtraSpc}>Remove extra spaces</button>
-               <button className="btn btn-success  btn-sm mx-1" onClick={handleCopy}>Copy Text</button>
-               <button className="btn btn-danger  btn-sm mx-1" onClick={handleClrClick}>Clear Text</button>
+               <button disabled={Text.length===0} className="btn btn-primary  btn-sm mx-1" onClick={handleUpClick}>Convert to UpperCase</button>
+               <button disabled={Text.length===0} className="btn btn-primary  btn-sm mx-1" onClick={handleLowClick}>Convert to LowerCase</button>
+               <button disabled={Text.length===0} className="btn btn-primary  btn-sm mx-1" onClick={handleExtraSpc}>Remove extra spaces</button>
+               <button disabled={Text.length===0} className="btn btn-success  btn-sm mx-1" onClick={handleCopy}>Copy Text</button>
+               <button disabled={Text.length===0} className="btn btn-danger  btn-sm mx-1" onClick={handleClrClick}>Clear Text</button>
           </div>
           <div className="mb-5">
                <h1>Your Text Summary : </h1>
-               <p>Number of words - {Text.split(" ").length} </p>
-               <p>Number of sentences - {Text.split(".").length} </p>
+               <p>Number of words - {Text.split(" ").filter((element)=>{return element.length!==0}).length} </p>
+               <p>Number of sentences - {Text.split(".").filter((element)=>{return element.length!==0}).length} </p>
                <p>Number of characters (with spaces) - {Text.length} characters </p>
                <p>Average read time - {Text.split(" ").length*0.004} min</p>
           </div>
